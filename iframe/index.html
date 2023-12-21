@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>iframe</title>
+
+	<style>
+		body {
+			background-color: #666;
+		}
+	</style>
+</head>
+<body>
+	<h1>Hello this is an iframe!</h1>
+
+	<script>
+		let count = 0;
+
+		function ping() {
+			postMessage(`ping! ${count}`, "*");
+			count++;
+		}
+
+		function listen() {
+			addEventListener("message", (e) => { console.log(e.data) });
+		}
+
+		listen();
+		setInterval(ping, 1000);
+	</script>
+</body>
+</html>

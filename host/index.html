@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>host</title>
+
+	<style>
+		body {
+			background-color: #323232;
+		}
+	</style>
+</head>
+<body>
+	<iframe src="http://localhost:8001"></iframe>
+
+	<script>
+		function listen() {
+			addEventListener("message", (e) => { console.log(e.data) });
+		}
+
+		listen();
+	</script>
+</body>
+</html>
