@@ -7,6 +7,7 @@
 	<style>
 		body {
 			background-color: #323232;
+			color: white;
 		}
 
 		iframe {
@@ -19,11 +20,30 @@
 	<iframe src="http://localhost:5173/applet/change_of_basis/square_grid"></iframe>
 
 	<script>
-		function listen() {
-			addEventListener("message", (e) => { console.log("[host]", e.data) });
+		// Set contents of some "updatable" element in the DOM to the given value
+		function update(key, value) {
+			let updatable = document.querySelector(`updatable[id="${key}"]`);
+			if (updatable) {
+				updatable.innerHTML = value;
+			}
 		}
 
-		listen();
+		// Listen for messages from the iframe, and trigger updates to the DOM
+		addEventListener("message", (e) => {
+			let data = e.data;
+			for ([component, value] of Object.entries(data.position)) {
+				let key = [data.applet, data.variable, component].join("-");
+				update(key, value);
+			}
+		});
+
+
+		// Debugging output for messages from the iframe
+		addEventListener("message", (e) => { console.log("[host]", e.data) });
 	</script>
+
+	<br><br><br>
+	b1 = (<updatable id="change_of_basis-square_grid-b1-x">x</updatable>, <updatable id="change_of_basis-square_grid-b1-y">y</updatable>)<br>
+	b2 = (<updatable id="change_of_basis-square_grid-b2-x">x</updatable>, <updatable id="change_of_basis-square_grid-b2-y">y</updatable>)
 </body>
 </html>
