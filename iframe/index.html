@@ -16,8 +16,13 @@
 	<script>
 		let count = 0;
 
+		function detectIframe() {
+			return window.self !== window.top;
+		}
+
 		function ping() {
-			postMessage(`ping! ${count}`, "*");
+			if (detectIframe())
+				top.postMessage(`ping! ${count}`, "*");
 			count++;
 		}
 
