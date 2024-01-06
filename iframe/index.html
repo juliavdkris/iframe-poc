@@ -22,7 +22,7 @@
 		}
 
 		function listen() {
-			addEventListener("message", (e) => { console.log(e.data) });
+			addEventListener("message", (e) => { console.log(`[iframe] ${e.data}`) });
 		}
 
 		listen();

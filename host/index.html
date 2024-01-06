@@ -16,7 +16,7 @@
 
 	<script>
 		function listen() {
-			addEventListener("message", (e) => { console.log(e.data) });
+			addEventListener("message", (e) => { console.log(`[host] ${e.data}`) });
 		}
 
 		listen();
